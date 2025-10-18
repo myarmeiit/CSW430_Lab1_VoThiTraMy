@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, Button, Alert, StyleSheet } from 'react-native';
 
-const EmployeeForm = () => {
-    const [fullName, setFullName] = useState('');
-    const [age, setAge] = useState('');
-    const [occupation, setOccupation] = useState('');
+const EmployeeDetail = ({ fullName, age, occupation }) => {
+    return (
+        <View style={styles.box}>
+            <Text style={styles.text}>Full Name: {fullName}</Text>
+            <Text style={styles.text}>Age: {age}</Text>
+            <Text style={styles.text}>Occupation: {occupation}</Text>
+        </View>
+    );
+};
+
+const EmployeeInfo = () => {
+    const employee = {
+        fullName: 'Vo Thi Tra My',
+        age: 24,
+        occupation: 'Student',
+    };
 
     const handleUpdate = () => {
         Alert.alert('Success', 'Update success!');
@@ -14,26 +26,10 @@ const EmployeeForm = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Employee Information</Text>
 
-            <TextInput
-                placeholder="Full Name"
-                style={styles.input}
-                value={fullName}
-                onChangeText={setFullName}
-            />
-
-            <TextInput
-                placeholder="Age"
-                keyboardType="numeric"
-                style={styles.input}
-                value={age}
-                onChangeText={setAge}
-            />
-
-            <TextInput
-                placeholder="Occupation"
-                style={styles.input}
-                value={occupation}
-                onChangeText={setOccupation}
+            <EmployeeDetail
+                fullName={employee.fullName}
+                age={employee.age}
+                occupation={employee.occupation}
             />
 
             <Button title="Update" onPress={handleUpdate} />
@@ -44,13 +40,14 @@ const EmployeeForm = () => {
 const styles = StyleSheet.create({
     container: { flex: 1, padding: 20 },
     title: { fontSize: 20, marginBottom: 15, fontWeight: 'bold' },
-    input: {
+    box: {
         borderWidth: 1,
         borderColor: '#ccc',
         padding: 10,
-        marginBottom: 10,
+        marginBottom: 15,
         borderRadius: 5,
     },
+    text: { fontSize: 16, marginBottom: 5 },
 });
 
-export default EmployeeForm;
+export default EmployeeInfo;
